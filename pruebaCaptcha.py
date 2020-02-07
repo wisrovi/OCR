@@ -106,8 +106,9 @@ imagenFiltrada = LimpiarImagen(nameFile)
 #imagenReforzada = ReforzarColores(imagenFiltrada, nameFileFilter)
 
 
-result = pytesseract.image_to_string(imagenFiltrada) 
-print( result )
+file_handle = open(nameFile, 'rb')
+result = subprocess.Popen(['gocr -i captcha.png'], shell=True, stdout=subprocess.PIPE).communicate()[0]
+file_handle.close
 
 
 values = {'cametu':result}
